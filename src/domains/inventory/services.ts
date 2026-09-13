@@ -34,3 +34,12 @@ export async function reserveInventory(productId: string, quantity: number): Pro
   if (error) throw error;
   return data;
 }
+
+export async function updateProductInventory(productId: string, newQuantity: number) {
+  const supabase = await createClient();
+  const { error } = await supabase
+    .from('products')
+    .update({ inventory_count: newQuantity })
+    .eq('id', productId);
+  if (error) throw error;
+}
