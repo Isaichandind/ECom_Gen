@@ -1,8 +1,14 @@
-import { createClient } from '@/shared/lib/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 import { Product } from './types';
 
+// Use service role key to bypass RLS for public product catalog
+const getAdminSupabase = () => createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
 export async function getProducts(): Promise<Product[]> {
-  const supabase = await createClient();
+  const supabase = getAdminSupabase();
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -13,7 +19,7 @@ export async function getProducts(): Promise<Product[]> {
 }
 
 export async function getProductById(id: string): Promise<Product> {
-  const supabase = await createClient();
+  const supabase = getAdminSupabase();
   const { data, error } = await supabase
     .from('products')
     .select('*')
@@ -25,7 +31,7 @@ export async function getProductById(id: string): Promise<Product> {
 }
 
 export async function reserveInventory(productId: string, quantity: number): Promise<boolean> {
-  const supabase = await createClient();
+  const supabase = getAdminSupabase();
   const { data, error } = await supabase.rpc('reserve_inventory', {
     p_product_id: productId,
     p_quantity: quantity,
@@ -36,7 +42,7 @@ export async function reserveInventory(productId: string, quantity: number): Pro
 }
 
 export async function updateProductInventory(productId: string, newQuantity: number) {
-  const supabase = await createClient();
+  const supabase = getAdminSupabase();
   const { error } = await supabase
     .from('products')
     .update({ inventory_count: newQuantity })

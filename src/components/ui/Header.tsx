@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { Search, User, ShoppingBag, Leaf } from 'lucide-react';
 import { CartDrawer } from './CartDrawer';
 import { useCartStore } from '@/shared/store/cart';
-import { createClient } from '@/shared/lib/supabase/client';
 import { Product } from '@/domains/inventory/types';
 
 export function Header() {
@@ -20,9 +19,13 @@ export function Header() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const supabase = createClient();
-      const { data } = await supabase.from('products').select('*');
-      if (data) setProducts(data);
+      try {
+        const res = await fetch('/api/products');
+        const data = await res.json();
+        if (Array.isArray(data)) setProducts(data);
+      } catch (err) {
+        console.error('Failed to fetch products for search');
+      }
     };
     fetchProducts();
   }, []);
