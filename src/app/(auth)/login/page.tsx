@@ -82,17 +82,7 @@ export default function LoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-black outline-none transition-all"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-foreground/80 mb-1">Password</label>
-            <input
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-black outline-none transition-all"
+              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-foreground outline-none transition-all"
             />
           </div>
           <button
@@ -104,7 +94,7 @@ export default function LoginPage() {
           </button>
         </form>
         <div className="mt-6 text-center text-sm text-foreground/60">
-          Don&apos;t have an account? <a href="/register" className="text-black font-medium hover:underline">Sign up</a>
+          Don&apos;t have an account? <a href="/register" className="text-foreground font-medium hover:underline">Sign up</a>
         </div>
       </div>
     </main>

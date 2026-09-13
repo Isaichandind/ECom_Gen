@@ -35,18 +35,18 @@ export default function ShopLayout({ children }: { children: React.ReactNode }) 
       <div className="bg-[#111111] text-white">
         <div className="max-w-[1400px] mx-auto px-6 py-24 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold mb-4">Join the Vitality Club</h2>
-          <p className="text-foreground/40 mb-8 max-w-md mx-auto">Get early access to new product drops, exclusive wellness guides, and member-only pricing.</p>
+          <p className="text-white/40 mb-8 max-w-md mx-auto">Get early access to new product drops, exclusive wellness guides, and member-only pricing.</p>
           <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
             <input 
               type="email" 
               placeholder="Enter your email address" 
-              className="flex-1 bg-card/10 border border-white/20 rounded-md px-4 py-3 text-sm text-white placeholder:text-foreground/60 focus:outline-none focus:border-white transition-colors"
+              className="flex-1 bg-white/10 border border-white/20 rounded-md px-4 py-3 text-sm text-white placeholder:text-white/60 focus:outline-none focus:border-white transition-colors"
             />
-            <button className="bg-card text-black px-6 py-3 rounded-md text-sm font-semibold hover:bg-foreground/20 transition-colors">
+            <button className="bg-white text-black px-6 py-3 rounded-md text-sm font-semibold hover:bg-white/90 transition-colors">
               Subscribe
             </button>
           </div>
-          <p className="text-[10px] text-foreground/60 tracking-wider uppercase mt-4">NO SPAM. JUST WELLNESS. UNSUBSCRIBE AT ANY TIME.</p>
+          <p className="text-[10px] text-white/60 tracking-wider uppercase mt-4">NO SPAM. JUST WELLNESS. UNSUBSCRIBE AT ANY TIME.</p>
         </div>
       </div>
 

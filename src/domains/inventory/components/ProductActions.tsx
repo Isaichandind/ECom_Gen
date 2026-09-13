@@ -56,10 +56,10 @@ export function ProductActions({ product }: { product: Product }) {
       <button
         onClick={handleAddToCart}
         disabled={isSoldOut}
-        className={`w-full py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-center ${
+        className={`w-full py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 ${
           isSoldOut 
-            ? 'bg-zinc-100 text-zinc-400 cursor-not-allowed' 
-            : 'bg-zinc-950 text-white hover:bg-zinc-800'
+            ? 'bg-foreground/10 text-foreground/40 cursor-not-allowed' 
+            : 'bg-foreground text-background hover:opacity-90'
         }`}
       >
         {isSoldOut ? 'Sold Out' : 'Add to Cart'}

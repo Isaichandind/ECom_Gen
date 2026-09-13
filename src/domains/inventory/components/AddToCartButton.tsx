@@ -9,11 +9,11 @@ export function AddToCartButton({ product, variant = 'ghost' }: { product: Produ
   const baseClasses = "w-full py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-center";
   
   const variantClasses = {
-    ghost: "bg-card text-zinc-950 border border-zinc-200 hover:border-zinc-950 lg:opacity-0 lg:group-hover:opacity-100 focus:opacity-100",
-    primary: "bg-zinc-950 text-white hover:bg-zinc-800"
+    ghost: "bg-card text-foreground border border-border hover:border-foreground lg:opacity-0 lg:group-hover:opacity-100 focus:opacity-100",
+    primary: "bg-foreground text-background hover:opacity-90"
   };
 
-  const disabledClasses = "bg-zinc-100 text-zinc-400 border-none opacity-100 cursor-not-allowed";
+  const disabledClasses = "bg-foreground/10 text-foreground/40 border-none opacity-100 cursor-not-allowed";
 
   return (
     <button

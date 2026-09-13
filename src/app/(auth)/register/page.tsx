@@ -88,7 +88,7 @@ export default function RegisterPage() {
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-black outline-none transition-all"
+              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-foreground outline-none transition-all"
             />
           </div>
           <div>
@@ -98,7 +98,7 @@ export default function RegisterPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-black outline-none transition-all"
+              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-foreground outline-none transition-all"
             />
           </div>
           <div>
@@ -108,7 +108,7 @@ export default function RegisterPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-black outline-none transition-all"
+              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-foreground outline-none transition-all"
             />
           </div>
           <button
@@ -120,7 +120,7 @@ export default function RegisterPage() {
           </button>
         </form>
         <div className="mt-6 text-center text-sm text-foreground/60">
-          Already have an account? <a href="/login" className="text-black font-medium hover:underline">Sign in</a>
+          Already have an account? <a href="/login" className="text-foreground font-medium hover:underline">Sign in</a>
         </div>
       </div>
     </main>
