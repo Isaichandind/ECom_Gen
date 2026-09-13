@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Search, User, ShoppingBag } from 'lucide-react';
+import { Search, User, ShoppingBag, Hexagon } from 'lucide-react';
 import { CartDrawer } from './CartDrawer';
 import { useCartStore } from '@/shared/store/cart';
 
@@ -14,31 +14,47 @@ export function Header() {
 
   return (
     <>
-      <header className="bg-white/80 backdrop-blur-md border-b border-zinc-200 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-black text-zinc-950 tracking-tight">
-            ECOM<span className="text-zinc-400">.</span>
-          </Link>
+      <header className="bg-[#f9f9f9] border-b border-gray-200 sticky top-0 z-40">
+        <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
+          <div className="flex items-center gap-12">
+            <Link href="/" className="flex items-center gap-2">
+              <Hexagon className="w-6 h-6 text-gray-900 fill-current" />
+              <span className="text-xl font-bold tracking-tight text-gray-900">TechGear</span>
+            </Link>
+            
+            <nav className="hidden md:flex items-center gap-6 text-[13px] font-medium text-gray-500">
+              <Link href="#" className="hover:text-gray-900 transition-colors">New Arrivals</Link>
+              <Link href="#" className="hover:text-gray-900 transition-colors">Audio</Link>
+              <Link href="#" className="hover:text-gray-900 transition-colors">Computing</Link>
+              <Link href="#" className="hover:text-gray-900 transition-colors">Accessories</Link>
+              <Link href="#" className="text-gray-900 hover:text-gray-600 transition-colors">Sale</Link>
+            </nav>
+          </div>
           
-          <nav className="flex items-center gap-6">
-            <button className="text-zinc-600 hover:text-zinc-950 transition-colors">
-              <Search className="w-5 h-5" />
-            </button>
-            <Link href="/login" className="text-zinc-600 hover:text-zinc-950 transition-colors">
+          <div className="flex items-center gap-6">
+            <div className="hidden lg:flex items-center bg-gray-100 rounded-md px-3 py-2 w-64 border border-transparent focus-within:border-gray-300 focus-within:bg-white transition-all">
+              <Search className="w-4 h-4 text-gray-400 mr-2" />
+              <input 
+                type="text" 
+                placeholder="Search products..." 
+                className="bg-transparent border-none outline-none text-[13px] w-full text-gray-900 placeholder:text-gray-400"
+              />
+            </div>
+
+            <Link href="/login" className="text-gray-600 hover:text-gray-900 transition-colors">
               <User className="w-5 h-5" />
             </Link>
+            
             <button 
               onClick={() => setIsCartOpen(true)} 
-              className="text-zinc-600 hover:text-zinc-950 transition-colors relative"
+              className="text-gray-600 hover:text-gray-900 transition-colors relative flex items-center gap-1"
             >
               <ShoppingBag className="w-5 h-5" />
-              {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-zinc-950 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
-                  {itemCount}
-                </span>
-              )}
+              <span className="bg-gray-900 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center absolute -top-1 -right-2">
+                {itemCount}
+              </span>
             </button>
-          </nav>
+          </div>
         </div>
       </header>
 
