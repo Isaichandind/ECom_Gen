@@ -40,7 +40,7 @@ export default function RegisterPage() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50">
       <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-sm border border-gray-100">
-        <h1 className="text-3xl font-black text-center mb-2">Create Account</h1>
+        <h1 className="text-3xl font-black text-center mb-2 text-gray-900">Create Account</h1>
         <p className="text-center text-gray-500 mb-8">Join the platform</p>
         
         <form onSubmit={handleRegister} className="space-y-4">
@@ -51,7 +51,7 @@ export default function RegisterPage() {
               required
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="w-full p-3 border rounded-xl bg-gray-50 focus:ring-2 focus:ring-black outline-none"
+              className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-black outline-none transition-all"
             />
           </div>
           <div>
@@ -61,7 +61,7 @@ export default function RegisterPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border rounded-xl bg-gray-50 focus:ring-2 focus:ring-black outline-none"
+              className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-black outline-none transition-all"
             />
           </div>
           <div>
@@ -71,7 +71,7 @@ export default function RegisterPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border rounded-xl bg-gray-50 focus:ring-2 focus:ring-black outline-none"
+              className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-black outline-none transition-all"
             />
           </div>
           <button
