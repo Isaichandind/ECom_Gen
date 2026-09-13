@@ -21,7 +21,10 @@ export async function POST(request: Request) {
     const order = await submitOrderUTR(orderId, utr);
 
     return NextResponse.json({ success: true, order });
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+    return NextResponse.json({ error: 'Unknown error' }, { status: 500 });
   }
 }

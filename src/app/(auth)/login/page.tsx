@@ -24,8 +24,12 @@ export default function LoginPage() {
 
       router.push('/');
       router.refresh();
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert(String(error));
+      }
     } finally {
       setLoading(false);
     }
@@ -67,7 +71,7 @@ export default function LoginPage() {
           </button>
         </form>
         <div className="mt-6 text-center text-sm text-gray-500">
-          Don't have an account? <a href="/register" className="text-black font-medium hover:underline">Sign up</a>
+          Don&apos;t have an account? <a href="/register" className="text-black font-medium hover:underline">Sign up</a>
         </div>
       </div>
     </main>

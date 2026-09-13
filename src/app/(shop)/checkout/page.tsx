@@ -36,8 +36,12 @@ export default function CheckoutPage() {
       }
       if (data.error) throw new Error(data.error);
       setOrderId(data.orderId);
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert(String(error));
+      }
     } finally {
       setLoading(false);
     }
@@ -58,8 +62,12 @@ export default function CheckoutPage() {
       
       setPaymentConfirmed(true);
       clearCart();
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert(String(error));
+      }
     } finally {
       setLoading(false);
     }
@@ -90,7 +98,7 @@ export default function CheckoutPage() {
           
           <h1 className="text-4xl font-bold tracking-tight text-gray-900 mb-4">Thank you for your order!</h1>
           <p className="text-gray-500 mb-10 max-w-lg mx-auto">
-            We've received your order and are getting it ready for shipment. To finalize processing, please send the order details to the store owner via WhatsApp.
+            We&apos;ve received your order and are getting it ready for shipment. To finalize processing, please send the order details to the store owner via WhatsApp.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
@@ -195,7 +203,7 @@ export default function CheckoutPage() {
                 </div>
               ) : (
                 <div className="border border-gray-200 rounded-xl p-6 flex flex-col items-center">
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">Scan & Pay</h3>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">Scan &amp; Pay</h3>
                   <p className="text-sm text-gray-500 mb-6">Open your UPI app and scan this code to pay <strong>₹{total.toFixed(2)}</strong></p>
                   
                   <div className="p-4 bg-white border border-gray-200 shadow-sm rounded-xl mb-8">

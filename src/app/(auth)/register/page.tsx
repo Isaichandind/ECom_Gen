@@ -30,8 +30,12 @@ export default function RegisterPage() {
       
       alert('Registration successful! Please login.');
       router.push('/login');
-    } catch (error: any) {
-      alert(error.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        alert(error.message);
+      } else {
+        alert(String(error));
+      }
     } finally {
       setLoading(false);
     }
