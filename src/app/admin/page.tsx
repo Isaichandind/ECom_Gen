@@ -17,6 +17,32 @@ export default async function AdminDashboardPage() {
 
   const revenue = orders?.filter(o => o.status === 'paid' || o.status === 'shipped').reduce((acc, o) => acc + Number(o.total_amount), 0) || 0;
 
+  // Fetch real analytics data
+  const { createAdminClient } = await import('@/shared/lib/supabase/admin');
+  const supabaseAdmin = createAdminClient();
+  
+  // Total Customers
+  const { count: customersCount } = await supabaseAdmin
+    .from('profiles')
+    .select('*', { count: 'exact', head: true })
+    .eq('role', 'user');
+
+  // Total Products Sold
+  const { data: orderItems } = await supabaseAdmin
+    .from('order_items')
+    .select('quantity, orders!inner(status)')
+    .in('orders.status', ['paid', 'shipped']);
+  
+  const totalProductsSold = orderItems?.reduce((acc, item) => acc + item.quantity, 0) || 0;
+
+  // Low Stock Products
+  const { data: lowStockProducts } = await supabaseAdmin
+    .from('products')
+    .select('*')
+    .lt('inventory_count', 20)
+    .order('inventory_count', { ascending: true })
+    .limit(5);
+
   return (
     <div className="max-w-[1400px] mx-auto">
       {/* Header Actions */}
@@ -70,21 +96,21 @@ export default async function AdminDashboardPage() {
             <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Customers</h3>
             <div className="w-8 h-8 rounded bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100"><Users className="w-4 h-4" /></div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-2">1,234</div>
-          <div className="flex items-center gap-1 text-xs font-medium text-red-500 mt-auto">
-            <TrendingDown className="w-3 h-3" /> -3.1% <span className="text-gray-400">vs last week</span>
+          <div className="text-3xl font-bold text-gray-900 mb-2">{customersCount || 0}</div>
+          <div className="flex items-center gap-1 text-xs font-medium text-green-600 mt-auto">
+            <TrendingUp className="w-3 h-3" /> Live
           </div>
         </div>
 
-        {/* Stock Alerts */}
+        {/* Products Sold */}
         <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Stock Alerts</h3>
-            <div className="w-8 h-8 rounded bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100">!</div>
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Products Sold</h3>
+            <div className="w-8 h-8 rounded bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100"><Package className="w-4 h-4" /></div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-2">4</div>
+          <div className="text-3xl font-bold text-gray-900 mb-2">{totalProductsSold}</div>
           <div className="flex items-center gap-1 text-xs font-medium text-green-600 mt-auto">
-            ~ +2 new <span className="text-gray-400">vs last week</span>
+            <TrendingUp className="w-3 h-3" /> Live
           </div>
         </div>
       </div>
@@ -119,7 +145,9 @@ export default async function AdminDashboardPage() {
                     <tr key={order.id} className="hover:bg-gray-50 transition-colors">
                       <td className="px-6 py-4">
                         <div className="font-bold text-gray-900">#ORD-{order.id.slice(0, 4).toUpperCase()}</div>
-                        <div className="text-[10px] font-bold text-gray-400 tracking-wider uppercase mt-1">Just Now</div>
+                        <div className="text-[10px] font-bold text-gray-400 tracking-wider uppercase mt-1">
+                          {new Date(order.created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
+                        </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="font-medium text-gray-900">{order.profiles?.username || 'Guest Customer'}</div>
@@ -168,22 +196,22 @@ export default async function AdminDashboardPage() {
             </div>
             
             <div className="space-y-4">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-gray-100 rounded flex-shrink-0"></div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold text-gray-900">Product A - 250g Packet</div>
-                  <div className="text-xs text-gray-500">3 left • SKU: PA-250</div>
-                </div>
-                <div className="text-xs font-bold text-red-500">6%</div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-gray-100 rounded flex-shrink-0"></div>
-                <div className="flex-1">
-                  <div className="text-sm font-semibold text-gray-900">Product C - 2kg Packet</div>
-                  <div className="text-xs text-gray-500">1 left • SKU: PC-2K</div>
-                </div>
-                <div className="text-xs font-bold text-red-500">3%</div>
-              </div>
+              {lowStockProducts && lowStockProducts.length > 0 ? (
+                lowStockProducts.map(p => (
+                  <div key={p.id} className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-gray-100 rounded flex-shrink-0 flex items-center justify-center">
+                      <Package className="w-5 h-5 text-gray-400" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-semibold text-gray-900">{p.name}</div>
+                      <div className="text-xs text-gray-500">{p.inventory_count} left in stock</div>
+                    </div>
+                    <div className="text-xs font-bold text-red-500">Critical</div>
+                  </div>
+                ))
+              ) : (
+                <div className="text-sm text-gray-500">No low stock items. All good!</div>
+              )}
             </div>
             
             <button className="w-full mt-6 flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-md text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors shadow-sm">

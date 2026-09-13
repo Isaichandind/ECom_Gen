@@ -1,5 +1,5 @@
 import { getProducts } from '@/domains/inventory/services';
-import { AddToCartButton } from '@/domains/inventory/components/AddToCartButton';
+import { ProductActions } from '@/domains/inventory/components/ProductActions';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Heart, Share2, Shield, Globe, Clock, Leaf } from 'lucide-react';
@@ -72,27 +72,14 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             </div>
           </div>
 
-          <div className="mb-8">
-            <h3 className="text-[11px] font-bold text-gray-400 tracking-wider uppercase mb-3">Quantity</h3>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center bg-white border border-gray-200 rounded-md">
-                <button className="px-4 py-2 text-gray-500 hover:text-gray-900 transition-colors">-</button>
-                <span className="px-4 py-2 text-sm font-semibold text-gray-900 border-x border-gray-200">1</span>
-                <button className="px-4 py-2 text-gray-500 hover:text-gray-900 transition-colors">+</button>
-              </div>
-              <span className="text-xs text-green-600 font-medium flex items-center gap-1"><Clock className="w-3 h-3" /> In Stock & Ready to Ship</span>
-            </div>
-          </div>
+          <ProductActions product={product} />
 
-          <div className="flex gap-4 mb-8">
-            <div className="flex-1">
-              <AddToCartButton product={product} variant="primary" />
-            </div>
-            <button className="w-12 flex items-center justify-center border border-gray-200 bg-white rounded-lg hover:border-green-600 hover:text-green-600 transition-colors text-gray-400">
-              <Heart className="w-5 h-5" />
+          <div className="flex gap-4 mb-8 mt-4">
+            <button className="flex-1 flex items-center justify-center border border-gray-200 bg-white rounded-lg hover:border-green-600 hover:text-green-600 transition-colors text-gray-400 py-3">
+              <Heart className="w-5 h-5 mr-2" /> Wishlist
             </button>
-            <button className="w-12 flex items-center justify-center border border-gray-200 bg-white rounded-lg hover:border-gray-900 transition-colors text-gray-400">
-              <Share2 className="w-5 h-5" />
+            <button className="flex-1 flex items-center justify-center border border-gray-200 bg-white rounded-lg hover:border-gray-900 transition-colors text-gray-400 py-3">
+              <Share2 className="w-5 h-5 mr-2" /> Share
             </button>
           </div>
 

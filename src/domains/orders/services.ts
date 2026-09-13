@@ -85,7 +85,7 @@ export async function getUserOrders(profileId: string): Promise<Order[]> {
 }
 
 export async function getAdminOrders(page: number, limit: number, status?: Order['status']) {
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   
   let query = supabase
     .from('orders')
