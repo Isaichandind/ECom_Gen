@@ -1,7 +1,29 @@
 import Link from 'next/link';
 import { LayoutDashboard, ShoppingCart, Package, Leaf, LogOut, Search, Bell } from 'lucide-react';
+import { createClient } from '@/shared/lib/supabase/server';
+import { redirect } from 'next/navigation';
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/login');
+  }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', user.id)
+    .single();
+
+  const handleLogout = async () => {
+    'use server';
+    const supabaseAction = await createClient();
+    await supabaseAction.auth.signOut();
+    redirect('/login');
+  };
+
   return (
     <div className="min-h-screen flex bg-gray-50">
       {/* Sidebar */}
@@ -27,10 +49,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Link>
         </nav>
         <div className="p-4 border-t border-gray-200">
-          <button className="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:text-gray-900 w-full font-medium text-sm transition-colors">
-            <LogOut className="w-4 h-4" />
-            Logout
-          </button>
+          <form action={handleLogout}>
+            <button type="submit" className="flex items-center gap-3 px-3 py-2.5 text-gray-600 hover:text-gray-900 w-full font-medium text-sm transition-colors">
+              <LogOut className="w-4 h-4" />
+              Logout
+            </button>
+          </form>
         </div>
       </aside>
 
@@ -56,10 +80,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <span className="absolute 0 top-0 right-0 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
             </button>
             <div className="flex items-center gap-3 border-l border-gray-200 pl-6">
-              <div className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-white text-xs font-bold">AR</div>
+              <div className="w-8 h-8 rounded-full bg-gray-900 flex items-center justify-center text-white text-xs font-bold uppercase">
+                {profile?.username?.slice(0, 2) || 'AD'}
+              </div>
               <div className="text-sm">
-                <div className="font-bold text-gray-900 leading-tight">Alex Rivers</div>
-                <div className="text-[10px] text-gray-500">Admin</div>
+                <div className="font-bold text-gray-900 leading-tight">{profile?.email || 'Admin User'}</div>
+                <div className="text-[10px] text-gray-500 capitalize">{profile?.role || 'Admin'}</div>
               </div>
             </div>
           </div>

@@ -1,19 +1,12 @@
 import { NextResponse } from 'next/server';
-import { resolveUsernameToEmail } from '@/domains/auth/services';
 import { createClient } from '@/shared/lib/supabase/server';
 
 export async function POST(request: Request) {
   try {
-    const { username, password } = await request.json();
+    const { email, password } = await request.json();
 
-    if (!username || !password) {
-      return NextResponse.json({ error: 'Username and password are required' }, { status: 400 });
-    }
-
-    const email = await resolveUsernameToEmail(username);
-
-    if (!email) {
-      return NextResponse.json({ error: 'Invalid username or password' }, { status: 401 });
+    if (!email || !password) {
+      return NextResponse.json({ error: 'Email and password are required' }, { status: 400 });
     }
 
     const supabase = await createClient();
