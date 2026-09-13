@@ -21,7 +21,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
         onClick={onClose}
       />
       
-      <div className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
+      <div className="fixed top-0 right-0 h-full w-full max-w-md bg-card shadow-2xl z-50 flex flex-col transform transition-transform duration-300">
         <div className="flex items-center justify-between p-6 border-b border-zinc-200">
           <h2 className="text-xl font-bold tracking-tight">Your Cart ({items.length})</h2>
           <button onClick={onClose} className="p-2 hover:bg-zinc-100 rounded-full transition-colors">

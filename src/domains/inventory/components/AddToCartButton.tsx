@@ -9,7 +9,7 @@ export function AddToCartButton({ product, variant = 'ghost' }: { product: Produ
   const baseClasses = "w-full py-3 rounded-lg font-medium transition-all duration-200 flex items-center justify-center";
   
   const variantClasses = {
-    ghost: "bg-white text-zinc-950 border border-zinc-200 hover:border-zinc-950 lg:opacity-0 lg:group-hover:opacity-100 focus:opacity-100",
+    ghost: "bg-card text-zinc-950 border border-zinc-200 hover:border-zinc-950 lg:opacity-0 lg:group-hover:opacity-100 focus:opacity-100",
     primary: "bg-zinc-950 text-white hover:bg-zinc-800"
   };
 

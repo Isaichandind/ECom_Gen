@@ -26,22 +26,22 @@ export function ProductActions({ product }: { product: Product }) {
   return (
     <>
       <div className="mb-8">
-        <h3 className="text-[11px] font-bold text-gray-400 tracking-wider uppercase mb-3">Quantity</h3>
+        <h3 className="text-[11px] font-bold text-foreground/40 tracking-wider uppercase mb-3">Quantity</h3>
         <div className="flex items-center gap-4">
-          <div className="flex items-center bg-white border border-gray-200 rounded-md">
+          <div className="flex items-center bg-card border border-border rounded-md">
             <button 
               onClick={handleDecrease}
-              className="px-4 py-2 text-gray-500 hover:text-gray-900 transition-colors disabled:opacity-50"
+              className="px-4 py-2 text-foreground/60 hover:text-foreground transition-colors disabled:opacity-50"
               disabled={quantity <= 1}
             >
               -
             </button>
-            <span className="px-4 py-2 text-sm font-semibold text-gray-900 border-x border-gray-200 w-12 text-center">
+            <span className="px-4 py-2 text-sm font-semibold text-foreground border-x border-border w-12 text-center">
               {quantity}
             </span>
             <button 
               onClick={handleIncrease}
-              className="px-4 py-2 text-gray-500 hover:text-gray-900 transition-colors disabled:opacity-50"
+              className="px-4 py-2 text-foreground/60 hover:text-foreground transition-colors disabled:opacity-50"
               disabled={quantity >= product.inventory_count}
             >
               +

@@ -47,14 +47,14 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50">
-      <div className="w-full max-w-md p-8 bg-white rounded-2xl shadow-sm border border-gray-100">
-        <h1 className="text-3xl font-black text-center mb-2 text-gray-900">Welcome Back</h1>
-        <p className="text-center text-gray-500 mb-8">Sign in to your account</p>
+    <main className="min-h-screen flex flex-col items-center justify-center p-8 bg-foreground/5">
+      <div className="w-full max-w-md p-8 bg-card rounded-2xl shadow-sm border border-border">
+        <h1 className="text-3xl font-black text-center mb-2 text-foreground">Welcome Back</h1>
+        <p className="text-center text-foreground/60 mb-8">Sign in to your account</p>
         
         <button
           onClick={handleGoogleLogin}
-          className="w-full bg-white border border-gray-200 text-gray-900 py-3.5 rounded-xl font-bold text-sm hover:bg-gray-50 transition-colors flex items-center justify-center gap-3 mb-6 shadow-sm"
+          className="w-full bg-card border border-border text-foreground py-3.5 rounded-xl font-bold text-sm hover:bg-foreground/5 transition-colors flex items-center justify-center gap-3 mb-6 shadow-sm"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -67,43 +67,43 @@ export default function LoginPage() {
 
         <div className="relative mb-6">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200"></div>
+            <div className="w-full border-t border-border"></div>
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500 font-medium">Or continue with email</span>
+            <span className="px-2 bg-card text-foreground/60 font-medium">Or continue with email</span>
           </div>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <label className="block text-sm font-medium text-foreground/80 mb-1">Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-black outline-none transition-all"
+              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-black outline-none transition-all"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <label className="block text-sm font-medium text-foreground/80 mb-1">Password</label>
             <input
               type="password"
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-3 border border-gray-300 rounded-xl bg-gray-50 text-gray-900 focus:bg-white focus:ring-2 focus:ring-black outline-none transition-all"
+              className="w-full p-3 border border-foreground/20 rounded-xl bg-foreground/5 text-foreground focus:bg-card focus:ring-2 focus:ring-black outline-none transition-all"
             />
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black text-white py-4 rounded-xl font-bold text-lg hover:bg-gray-800 disabled:opacity-50 transition-colors mt-4"
+            className="w-full bg-foreground text-background py-4 rounded-xl font-bold text-lg hover:bg-gray-800 disabled:opacity-50 transition-colors mt-4"
           >
             {loading ? 'Signing in...' : 'Sign In'}
           </button>
         </form>
-        <div className="mt-6 text-center text-sm text-gray-500">
+        <div className="mt-6 text-center text-sm text-foreground/60">
           Don&apos;t have an account? <a href="/register" className="text-black font-medium hover:underline">Sign up</a>
         </div>
       </div>

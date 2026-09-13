@@ -48,14 +48,14 @@ export default async function AdminDashboardPage() {
       {/* Header Actions */}
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Dashboard Overview</h1>
-          <p className="text-sm text-gray-500 mt-1">Welcome back, Alex. Here&apos;s what&apos;s happening with Vitality Powders today.</p>
+          <h1 className="text-2xl font-bold text-foreground tracking-tight">Dashboard Overview</h1>
+          <p className="text-sm text-foreground/60 mt-1">Welcome back, Alex. Here&apos;s what&apos;s happening with Vitality Powders today.</p>
         </div>
         <div className="flex gap-3">
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors shadow-sm">
+          <button className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-md text-sm font-medium text-foreground/80 hover:bg-foreground/5 transition-colors shadow-sm">
             <Calendar className="w-4 h-4" /> Last 7 Days
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors shadow-sm">
+          <button className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-md text-sm font-medium text-foreground/80 hover:bg-foreground/5 transition-colors shadow-sm">
             <Download className="w-4 h-4" /> Export Report
           </button>
           <button className="flex items-center gap-2 px-4 py-2 bg-gray-900 border border-gray-900 rounded-md text-sm font-medium text-white hover:bg-gray-800 transition-colors shadow-sm">
@@ -67,48 +67,48 @@ export default async function AdminDashboardPage() {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         {/* Revenue */}
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col">
+        <div className="bg-card p-6 rounded-xl border border-border shadow-sm flex flex-col">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Revenue</h3>
-            <div className="w-8 h-8 rounded bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100"><DollarSign className="w-4 h-4" /></div>
+            <h3 className="text-xs font-bold text-foreground/40 uppercase tracking-wider">Total Revenue</h3>
+            <div className="w-8 h-8 rounded bg-foreground/5 flex items-center justify-center text-foreground/40 border border-border"><DollarSign className="w-4 h-4" /></div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-2">₹{revenue.toLocaleString()}</div>
+          <div className="text-3xl font-bold text-foreground mb-2">₹{revenue.toLocaleString()}</div>
           <div className="flex items-center gap-1 text-xs font-medium text-green-600 mt-auto">
-            <TrendingUp className="w-3 h-3" /> +20.1% <span className="text-gray-400">vs last week</span>
+            <TrendingUp className="w-3 h-3" /> +20.1% <span className="text-foreground/40">vs last week</span>
           </div>
         </div>
         
         {/* Orders */}
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col">
+        <div className="bg-card p-6 rounded-xl border border-border shadow-sm flex flex-col">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Active Orders</h3>
-            <div className="w-8 h-8 rounded bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100"><Package className="w-4 h-4" /></div>
+            <h3 className="text-xs font-bold text-foreground/40 uppercase tracking-wider">Active Orders</h3>
+            <div className="w-8 h-8 rounded bg-foreground/5 flex items-center justify-center text-foreground/40 border border-border"><Package className="w-4 h-4" /></div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-2">{orders?.length || 0}</div>
+          <div className="text-3xl font-bold text-foreground mb-2">{orders?.length || 0}</div>
           <div className="flex items-center gap-1 text-xs font-medium text-green-600 mt-auto">
-            <TrendingUp className="w-3 h-3" /> +12.2% <span className="text-gray-400">vs last week</span>
+            <TrendingUp className="w-3 h-3" /> +12.2% <span className="text-foreground/40">vs last week</span>
           </div>
         </div>
 
         {/* Customers */}
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col">
+        <div className="bg-card p-6 rounded-xl border border-border shadow-sm flex flex-col">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Total Customers</h3>
-            <div className="w-8 h-8 rounded bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100"><Users className="w-4 h-4" /></div>
+            <h3 className="text-xs font-bold text-foreground/40 uppercase tracking-wider">Total Customers</h3>
+            <div className="w-8 h-8 rounded bg-foreground/5 flex items-center justify-center text-foreground/40 border border-border"><Users className="w-4 h-4" /></div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-2">{customersCount || 0}</div>
+          <div className="text-3xl font-bold text-foreground mb-2">{customersCount || 0}</div>
           <div className="flex items-center gap-1 text-xs font-medium text-green-600 mt-auto">
             <TrendingUp className="w-3 h-3" /> Live
           </div>
         </div>
 
         {/* Products Sold */}
-        <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex flex-col">
+        <div className="bg-card p-6 rounded-xl border border-border shadow-sm flex flex-col">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider">Products Sold</h3>
-            <div className="w-8 h-8 rounded bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100"><Package className="w-4 h-4" /></div>
+            <h3 className="text-xs font-bold text-foreground/40 uppercase tracking-wider">Products Sold</h3>
+            <div className="w-8 h-8 rounded bg-foreground/5 flex items-center justify-center text-foreground/40 border border-border"><Package className="w-4 h-4" /></div>
           </div>
-          <div className="text-3xl font-bold text-gray-900 mb-2">{totalProductsSold}</div>
+          <div className="text-3xl font-bold text-foreground mb-2">{totalProductsSold}</div>
           <div className="flex items-center gap-1 text-xs font-medium text-green-600 mt-auto">
             <TrendingUp className="w-3 h-3" /> Live
           </div>
@@ -121,18 +121,18 @@ export default async function AdminDashboardPage() {
         {/* Left Col (Recent Orders Table) */}
         <div className="lg:col-span-2 space-y-8">
           
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-            <div className="p-6 border-b border-gray-200 flex justify-between items-center">
+          <div className="bg-card rounded-xl shadow-sm border border-border overflow-hidden">
+            <div className="p-6 border-b border-border flex justify-between items-center">
               <div>
-                <h2 className="text-lg font-bold text-gray-900 tracking-tight">Recent Orders</h2>
-                <p className="text-xs text-gray-500">The last 5 orders placed on the storefront</p>
+                <h2 className="text-lg font-bold text-foreground tracking-tight">Recent Orders</h2>
+                <p className="text-xs text-foreground/60">The last 5 orders placed on the storefront</p>
               </div>
-              <button className="text-sm font-semibold text-gray-900 hover:underline">View All →</button>
+              <button className="text-sm font-semibold text-foreground hover:underline">View All →</button>
             </div>
             
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="bg-gray-50 text-gray-400 text-xs font-bold uppercase tracking-wider border-b border-gray-200">
+                <thead className="bg-foreground/5 text-foreground/40 text-xs font-bold uppercase tracking-wider border-b border-border">
                   <tr>
                     <th className="px-6 py-4">Order ID</th>
                     <th className="px-6 py-4">Customer</th>
@@ -142,16 +142,16 @@ export default async function AdminDashboardPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {orders?.slice(0, 5).map((order: { id: string; created_at: string; profiles?: { username?: string }; total_amount: string; status: string }) => (
-                    <tr key={order.id} className="hover:bg-gray-50 transition-colors">
+                    <tr key={order.id} className="hover:bg-foreground/5 transition-colors">
                       <td className="px-6 py-4">
-                        <div className="font-bold text-gray-900">#ORD-{order.id.slice(0, 4).toUpperCase()}</div>
-                        <div className="text-[10px] font-bold text-gray-400 tracking-wider uppercase mt-1">
+                        <div className="font-bold text-foreground">#ORD-{order.id.slice(0, 4).toUpperCase()}</div>
+                        <div className="text-[10px] font-bold text-foreground/40 tracking-wider uppercase mt-1">
                           {new Date(order.created_at).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <div className="font-medium text-gray-500">Wait for the confirmation message in owner&apos;s whatsapp. They&apos;ll confirm and status will change.</div>
-                        <div className="text-xs text-gray-500">{order.profiles?.email || '-'}</div>
+                        <div className="font-medium text-foreground/60">Wait for the confirmation message in owner&apos;s whatsapp. They&apos;ll confirm and status will change.</div>
+                        <div className="text-xs text-foreground/60">{order.profiles?.email || '-'}</div>
                       </td>
                       <td className="px-6 py-4">
                         {order.status === 'pending_verification' ? (
@@ -164,18 +164,18 @@ export default async function AdminDashboardPage() {
                           </div>
                         ) : (
                           <span className={`px-2 py-1 rounded text-xs font-semibold border ${
-                            order.status === 'paid' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-gray-50 text-gray-600 border-gray-200'
+                            order.status === 'paid' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-foreground/5 text-foreground/70 border-border'
                           }`}>
                             {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
                           </span>
                         )}
                       </td>
-                      <td className="px-6 py-4 font-bold text-gray-900 text-right">₹{order.total_amount}</td>
+                      <td className="px-6 py-4 font-bold text-foreground text-right">₹{order.total_amount}</td>
                     </tr>
                   ))}
                   {(!orders || orders.length === 0) && (
                     <tr>
-                      <td colSpan={4} className="px-6 py-12 text-center text-gray-500">No orders found.</td>
+                      <td colSpan={4} className="px-6 py-12 text-center text-foreground/60">No orders found.</td>
                     </tr>
                   )}
                 </tbody>
@@ -186,11 +186,11 @@ export default async function AdminDashboardPage() {
 
         {/* Right Col */}
         <div className="space-y-8">
-          <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+          <div className="bg-card p-6 rounded-xl border border-border shadow-sm">
             <div className="flex justify-between items-start mb-6">
               <div>
-                <h2 className="text-lg font-bold text-gray-900 tracking-tight">Stock Alerts</h2>
-                <p className="text-xs text-gray-500">Items reaching critical replenishment levels</p>
+                <h2 className="text-lg font-bold text-foreground tracking-tight">Stock Alerts</h2>
+                <p className="text-xs text-foreground/60">Items reaching critical replenishment levels</p>
               </div>
               <span className="px-2 py-1 bg-red-50 text-red-600 border border-red-200 rounded text-[10px] font-bold tracking-wider uppercase">Low Stock</span>
             </div>
@@ -199,22 +199,22 @@ export default async function AdminDashboardPage() {
               {lowStockProducts && lowStockProducts.length > 0 ? (
                 lowStockProducts.map(p => (
                   <div key={p.id} className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-gray-100 rounded flex-shrink-0 flex items-center justify-center">
-                      <Package className="w-5 h-5 text-gray-400" />
+                    <div className="w-10 h-10 bg-foreground/10 rounded flex-shrink-0 flex items-center justify-center">
+                      <Package className="w-5 h-5 text-foreground/40" />
                     </div>
                     <div className="flex-1">
-                      <div className="text-sm font-semibold text-gray-900">{p.name}</div>
-                      <div className="text-xs text-gray-500">{p.inventory_count} left in stock</div>
+                      <div className="text-sm font-semibold text-foreground">{p.name}</div>
+                      <div className="text-xs text-foreground/60">{p.inventory_count} left in stock</div>
                     </div>
                     <div className="text-xs font-bold text-red-500">Critical</div>
                   </div>
                 ))
               ) : (
-                <div className="text-sm text-gray-500">No low stock items. All good!</div>
+                <div className="text-sm text-foreground/60">No low stock items. All good!</div>
               )}
             </div>
             
-            <button className="w-full mt-6 flex items-center justify-center gap-2 px-4 py-2.5 bg-white border border-gray-200 rounded-md text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors shadow-sm">
+            <button className="w-full mt-6 flex items-center justify-center gap-2 px-4 py-2.5 bg-card border border-border rounded-md text-sm font-semibold text-foreground/80 hover:bg-foreground/5 transition-colors shadow-sm">
               Manage Inventory 
             </button>
           </div>
