@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LayoutDashboard, ShoppingCart, Package, Hexagon, LogOut, Search, Bell } from 'lucide-react';
+import { LayoutDashboard, ShoppingCart, Package, Leaf, LogOut, Search, Bell } from 'lucide-react';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -8,8 +8,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside className="w-64 bg-white border-r border-gray-200 flex-shrink-0 flex flex-col hidden md:flex">
         <div className="h-[72px] flex items-center px-6 border-b border-gray-200">
           <Link href="/" className="flex items-center gap-2">
-            <Hexagon className="w-6 h-6 text-gray-900 fill-current" />
-            <span className="text-xl font-bold tracking-tight text-gray-900">TechGear</span>
+            <Leaf className="w-6 h-6 text-green-700 fill-current" />
+            <span className="text-xl font-bold tracking-tight text-gray-900">Vitality Powders</span>
           </Link>
         </div>
         <nav className="p-4 space-y-1 flex-1">

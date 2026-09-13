@@ -23,7 +23,7 @@ export default async function AdminDashboardPage() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-2xl font-bold text-gray-900 tracking-tight">Dashboard Overview</h1>
-          <p className="text-sm text-gray-500 mt-1">Welcome back, Alex. Here's what's happening with TechGear today.</p>
+          <p className="text-sm text-gray-500 mt-1">Welcome back, Alex. Here's what's happening with Vitality Powders today.</p>
         </div>
         <div className="flex gap-3">
           <button className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors shadow-sm">

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { Search, User, ShoppingBag, Hexagon } from 'lucide-react';
+import { Search, User, ShoppingBag, Leaf } from 'lucide-react';
 import { CartDrawer } from './CartDrawer';
 import { useCartStore } from '@/shared/store/cart';
 
@@ -18,16 +18,16 @@ export function Header() {
         <div className="max-w-[1400px] mx-auto px-6 h-[72px] flex items-center justify-between">
           <div className="flex items-center gap-12">
             <Link href="/" className="flex items-center gap-2">
-              <Hexagon className="w-6 h-6 text-gray-900 fill-current" />
-              <span className="text-xl font-bold tracking-tight text-gray-900">TechGear</span>
+              <Leaf className="w-6 h-6 text-green-700 fill-current" />
+              <span className="text-xl font-bold tracking-tight text-gray-900">Vitality Powders</span>
             </Link>
             
             <nav className="hidden md:flex items-center gap-6 text-[13px] font-medium text-gray-500">
-              <Link href="#" className="hover:text-gray-900 transition-colors">New Arrivals</Link>
-              <Link href="#" className="hover:text-gray-900 transition-colors">Audio</Link>
-              <Link href="#" className="hover:text-gray-900 transition-colors">Computing</Link>
-              <Link href="#" className="hover:text-gray-900 transition-colors">Accessories</Link>
-              <Link href="#" className="text-gray-900 hover:text-gray-600 transition-colors">Sale</Link>
+              <Link href="#" className="hover:text-gray-900 transition-colors">Proteins</Link>
+              <Link href="#" className="hover:text-gray-900 transition-colors">Superfoods</Link>
+              <Link href="#" className="hover:text-gray-900 transition-colors">Vitamins</Link>
+              <Link href="#" className="hover:text-gray-900 transition-colors">Recovery</Link>
+              <Link href="#" className="text-green-700 hover:text-green-800 transition-colors">Bundles</Link>
             </nav>
           </div>
           

@@ -78,7 +78,7 @@ export default function CheckoutPage() {
 
   if (paymentConfirmed) {
     const adminPhone = "919876543210"; // REPLACE WITH ACTUAL PHONE NUMBER
-    const whatsappMessage = encodeURIComponent(`Hello, I just placed an order on TechGear!\n\nOrder ID: ${orderId}\nAmount: ₹${total.toFixed(2)}\nUTR Reference: ${utr}\n\nPlease confirm my order. Thank you!`);
+    const whatsappMessage = encodeURIComponent(`Hello, I just placed an order on Vitality Powders!\n\nOrder ID: ${orderId}\nAmount: ₹${total.toFixed(2)}\nUTR Reference: ${utr}\n\nPlease confirm my order. Thank you!`);
     const waLink = `https://wa.me/${adminPhone}?text=${whatsappMessage}`;
 
     return (

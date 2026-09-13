@@ -16,16 +16,19 @@ envContent.split('\n').forEach(line => {
 const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
 
 const newProducts = [
-  { name: 'Product A - 250g Packet', description: 'Premium quality Product A in a 250g packet.', price: 150, inventory_count: 50 },
-  { name: 'Product A - 500g Packet', description: 'Premium quality Product A in a 500g packet.', price: 280, inventory_count: 45 },
-  { name: 'Product A - 1kg Packet', description: 'Premium quality Product A in a 1kg bulk packet.', price: 500, inventory_count: 30 },
-  { name: 'Product B - 250g Packet', description: 'High-grade Product B in a 250g packet.', price: 200, inventory_count: 50 },
-  { name: 'Product B - 500g Packet', description: 'High-grade Product B in a 500g packet.', price: 380, inventory_count: 40 },
-  { name: 'Product B - 1kg Packet', description: 'High-grade Product B in a 1kg packet.', price: 700, inventory_count: 25 },
-  { name: 'Product C - 1kg Packet', description: 'Exclusive Product C in a 1kg bulk packet.', price: 1200, inventory_count: 20 },
-  { name: 'Product C - 2kg Packet', description: 'Exclusive Product C in a 2kg family packet.', price: 2200, inventory_count: 15 },
-  { name: 'Product D - 1kg Packet', description: 'Everyday Product D in a 1kg packet.', price: 400, inventory_count: 100 },
-  { name: 'Product D - 2kg Packet', description: 'Everyday Product D in a 2kg packet.', price: 750, inventory_count: 80 },
+  { name: 'Essential Plant Protein - 250g', description: 'Clean, easily digestible plant-based protein for daily vitality.', price: 450, inventory_count: 50 },
+  { name: 'Essential Plant Protein - 500g', description: 'Clean, easily digestible plant-based protein for daily vitality.', price: 800, inventory_count: 45 },
+  { name: 'Essential Plant Protein - 1kg', description: 'Clean, easily digestible plant-based protein for daily vitality.', price: 1500, inventory_count: 30 },
+  
+  { name: 'Organic Greens Superblend - 250g', description: 'A nutrient-dense blend of spirulina, chlorella, and wheatgrass.', price: 500, inventory_count: 50 },
+  { name: 'Organic Greens Superblend - 500g', description: 'A nutrient-dense blend of spirulina, chlorella, and wheatgrass.', price: 900, inventory_count: 40 },
+  { name: 'Organic Greens Superblend - 1kg', description: 'A nutrient-dense blend of spirulina, chlorella, and wheatgrass.', price: 1700, inventory_count: 25 },
+  
+  { name: 'Recovery Matcha Powder - 250g', description: 'Ceremonial grade matcha infused with adaptogens for calm energy.', price: 600, inventory_count: 30 },
+  { name: 'Recovery Matcha Powder - 500g', description: 'Ceremonial grade matcha infused with adaptogens for calm energy.', price: 1100, inventory_count: 20 },
+  { name: 'Recovery Matcha Powder - 1kg', description: 'Ceremonial grade matcha infused with adaptogens for calm energy.', price: 2000, inventory_count: 15 },
+  
+  { name: 'Marine Collagen Peptides - 500g', description: 'Sustainably sourced marine collagen for skin and joint health.', price: 1200, inventory_count: 40 },
 ];
 
 async function seed() {
@@ -36,12 +39,12 @@ async function seed() {
     return;
   }
   
-  console.log('Inserting 10 new products...');
+  console.log('Inserting 10 new health powder products...');
   const { error: insertError } = await supabase.from('products').insert(newProducts);
   if (insertError) {
     console.error('Error inserting:', insertError);
   } else {
-    console.log('Successfully seeded 10 products!');
+    console.log('Successfully seeded 10 health powder products!');
   }
 }
 
