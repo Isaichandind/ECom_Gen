@@ -18,16 +18,20 @@ export const metadata: Metadata = {
 };
 
 import { Toaster } from 'sonner';
+import { ThemeProvider } from '@/components/ui/ThemeProvider';
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">
-        {children}
-        <Toaster position="top-center" richColors />
+      <body className="min-h-full flex flex-col bg-background text-foreground transition-colors duration-300">
+        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem themes={['light', 'dark', 'oled', 'ocean']}>
+          {children}
+          <Toaster position="top-center" richColors />
+        </ThemeProvider>
       </body>
     </html>
   );
