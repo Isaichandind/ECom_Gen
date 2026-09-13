@@ -22,7 +22,8 @@ export default function RegisterPage() {
         options: {
           data: {
             username,
-          }
+          },
+          emailRedirectTo: `${location.origin}/api/auth/confirm`
         }
       });
       
