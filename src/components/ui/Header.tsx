@@ -23,11 +23,7 @@ export function Header() {
             </Link>
             
             <nav className="hidden md:flex items-center gap-6 text-[13px] font-medium text-gray-500">
-              <Link href="#" className="hover:text-gray-900 transition-colors">Proteins</Link>
-              <Link href="#" className="hover:text-gray-900 transition-colors">Superfoods</Link>
-              <Link href="#" className="hover:text-gray-900 transition-colors">Vitamins</Link>
-              <Link href="#" className="hover:text-gray-900 transition-colors">Recovery</Link>
-              <Link href="#" className="text-green-700 hover:text-green-800 transition-colors">Bundles</Link>
+              <Link href="#" className="text-green-700 hover:text-green-800 transition-colors font-bold">Superfoods</Link>
             </nav>
           </div>
           

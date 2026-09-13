@@ -63,10 +63,7 @@ export default async function ShopHomePage() {
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {[
-            { icon: Droplets, name: 'Proteins', count: '3 ITEMS', comingSoon: false },
-            { icon: Leaf, name: 'Superfoods', count: '3 ITEMS', comingSoon: false },
-            { icon: HeartPulse, name: 'Vitamins', count: 'COMING SOON', comingSoon: true },
-            { icon: Activity, name: 'Recovery', count: '3 ITEMS', comingSoon: false }
+            { icon: Leaf, name: 'Superfoods', count: '10 ITEMS', comingSoon: false }
           ].map((cat, i) => (
             <div key={i} className={`bg-white p-8 rounded-xl border border-gray-200 flex flex-col items-center justify-center text-center transition-all ${cat.comingSoon ? 'opacity-60 cursor-not-allowed' : 'cursor-pointer hover:border-green-600'}`}>
               <cat.icon className={`w-8 h-8 mb-4 ${cat.comingSoon ? 'text-gray-400' : 'text-green-700'}`} strokeWidth={1.5} />
@@ -91,7 +88,6 @@ export default async function ShopHomePage() {
           </div>
           <div className="flex gap-2">
             <button className="px-5 py-2 rounded-full bg-gray-900 text-white text-sm font-medium">All</button>
-            <button className="px-5 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:border-gray-400 text-sm font-medium transition-colors">Proteins</button>
             <button className="px-5 py-2 rounded-full bg-white text-gray-600 border border-gray-200 hover:border-gray-400 text-sm font-medium transition-colors">Superfoods</button>
           </div>
         </div>

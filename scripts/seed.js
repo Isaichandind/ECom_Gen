@@ -16,19 +16,16 @@ envContent.split('\n').forEach(line => {
 const supabase = createClient(env.NEXT_PUBLIC_SUPABASE_URL, env.SUPABASE_SERVICE_ROLE_KEY);
 
 const newProducts = [
-  { name: 'Essential Plant Protein - 250g', description: 'Clean, easily digestible plant-based protein for daily vitality.', price: 450, inventory_count: 50 },
-  { name: 'Essential Plant Protein - 500g', description: 'Clean, easily digestible plant-based protein for daily vitality.', price: 800, inventory_count: 45 },
-  { name: 'Essential Plant Protein - 1kg', description: 'Clean, easily digestible plant-based protein for daily vitality.', price: 1500, inventory_count: 30 },
-  
-  { name: 'Organic Greens Superblend - 250g', description: 'A nutrient-dense blend of spirulina, chlorella, and wheatgrass.', price: 500, inventory_count: 50 },
-  { name: 'Organic Greens Superblend - 500g', description: 'A nutrient-dense blend of spirulina, chlorella, and wheatgrass.', price: 900, inventory_count: 40 },
-  { name: 'Organic Greens Superblend - 1kg', description: 'A nutrient-dense blend of spirulina, chlorella, and wheatgrass.', price: 1700, inventory_count: 25 },
-  
-  { name: 'Recovery Matcha Powder - 250g', description: 'Ceremonial grade matcha infused with adaptogens for calm energy.', price: 600, inventory_count: 30 },
-  { name: 'Recovery Matcha Powder - 500g', description: 'Ceremonial grade matcha infused with adaptogens for calm energy.', price: 1100, inventory_count: 20 },
-  { name: 'Recovery Matcha Powder - 1kg', description: 'Ceremonial grade matcha infused with adaptogens for calm energy.', price: 2000, inventory_count: 15 },
-  
-  { name: 'Marine Collagen Peptides - 500g', description: 'Sustainably sourced marine collagen for skin and joint health.', price: 1200, inventory_count: 40 },
+  { name: 'Prod 1 - 250g', description: 'Premium Superfood Prod 1', price: 450, inventory_count: 50 },
+  { name: 'Prod 2 - 500g', description: 'Premium Superfood Prod 2', price: 800, inventory_count: 45 },
+  { name: 'Prod 3 - 1kg', description: 'Premium Superfood Prod 3', price: 1500, inventory_count: 30 },
+  { name: 'Prod 4 - 250g', description: 'Premium Superfood Prod 4', price: 500, inventory_count: 50 },
+  { name: 'Prod 5 - 500g', description: 'Premium Superfood Prod 5', price: 900, inventory_count: 40 },
+  { name: 'Prod 6 - 1kg', description: 'Premium Superfood Prod 6', price: 1700, inventory_count: 25 },
+  { name: 'Prod 7 - 250g', description: 'Premium Superfood Prod 7', price: 600, inventory_count: 30 },
+  { name: 'Prod 8 - 500g', description: 'Premium Superfood Prod 8', price: 1100, inventory_count: 20 },
+  { name: 'Prod 9 - 1kg', description: 'Premium Superfood Prod 9', price: 2000, inventory_count: 15 },
+  { name: 'Prod 10 - 250g', description: 'Premium Superfood Prod 10', price: 550, inventory_count: 40 },
 ];
 
 async function seed() {
@@ -39,12 +36,12 @@ async function seed() {
     return;
   }
   
-  console.log('Inserting 10 new health powder products...');
+  console.log('Inserting 10 new Superfood products (Prod 1 - Prod 10)...');
   const { error: insertError } = await supabase.from('products').insert(newProducts);
   if (insertError) {
     console.error('Error inserting:', insertError);
   } else {
-    console.log('Successfully seeded 10 health powder products!');
+    console.log('Successfully seeded 10 Superfood products!');
   }
 }
 
