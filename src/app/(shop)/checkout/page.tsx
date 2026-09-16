@@ -12,6 +12,7 @@ export default function CheckoutPage() {
   const [orderId, setOrderId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [utr, setUtr] = useState('');
+  const [customerWhatsapp, setCustomerWhatsapp] = useState('');
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   const router = useRouter();
 
@@ -49,7 +50,10 @@ export default function CheckoutPage() {
 
   const handleConfirmUTR = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!utr || !orderId) return;
+    if (!utr || !orderId || !customerWhatsapp) {
+      alert("Please enter WhatsApp number and UTR");
+      return;
+    }
     setLoading(true);
     try {
       const res = await fetch('/api/payments/confirm', {
@@ -59,6 +63,13 @@ export default function CheckoutPage() {
       });
       const data = await res.json();
       if (data.error) throw new Error(data.error);
+
+      // Notify owner in background
+      fetch('/api/notifications/notify-owner', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderId, utr, total, items, customerWhatsapp }),
+      }).catch(err => console.error("Notification failed", err));
       
       setPaymentConfirmed(true);
       clearCart();
@@ -98,14 +109,14 @@ export default function CheckoutPage() {
           
           <h1 className="text-4xl font-bold tracking-tight text-foreground mb-4">Thank you for your order!</h1>
           <p className="text-foreground/60 mb-10 max-w-lg mx-auto">
-            We&apos;ve received your order and are getting it ready for shipment. To finalize processing, please send the order details to the store owner via WhatsApp.
+            Order placed and waiting for confirmation. You will receive a WhatsApp message on confirmation.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <a href={waLink} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-3.5 bg-[#25D366] text-white rounded-lg font-bold hover:bg-[#128C7E] transition-colors flex items-center justify-center gap-2 shadow-sm">
-               Confirm via WhatsApp
+            <a href={waLink} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-8 py-3.5 bg-[#25D366] text-white rounded-lg font-bold hover:bg-[#128C7E] transition-colors flex items-center justify-center gap-2 shadow-sm text-sm">
+               Alternatively, click here to notify owner via WhatsApp
             </a>
-            <button onClick={() => router.push('/')} className="w-full sm:w-auto px-8 py-3.5 bg-card text-foreground/80 border border-border rounded-lg font-medium hover:border-foreground transition-colors">
+            <button onClick={() => router.push('/')} className="w-full sm:w-auto px-8 py-3.5 bg-card text-foreground/80 border border-border rounded-lg font-medium hover:border-foreground transition-colors text-sm">
               Continue Shopping
             </button>
           </div>
@@ -149,12 +160,22 @@ export default function CheckoutPage() {
         {/* Left Column: Flow */}
         <div className="lg:col-span-7 space-y-6">
           {/* Step 1 */}
-          <div className="bg-card rounded-xl p-8 border border-border opacity-50">
+          <div className="bg-card rounded-xl p-8 border border-border">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-8 h-8 rounded-full bg-foreground text-background flex items-center justify-center font-bold text-sm">1</div>
               <h2 className="text-xl font-bold text-foreground">Contact Information</h2>
             </div>
-            <div className="ml-12 text-sm text-foreground/60">Completed (Assumed via Login)</div>
+            <div className="ml-12">
+              <label className="block text-xs font-bold text-foreground/80 uppercase tracking-wider mb-2">WhatsApp Number</label>
+              <input
+                type="tel"
+                required
+                value={customerWhatsapp}
+                onChange={(e) => setCustomerWhatsapp(e.target.value)}
+                placeholder="+91 9876543210"
+                className="w-full max-w-sm px-4 py-3 rounded-lg border border-foreground/20 bg-foreground/5 focus:bg-card focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none transition-all text-sm"
+              />
+            </div>
           </div>
 
           {/* Step 2 */}
@@ -192,7 +213,7 @@ export default function CheckoutPage() {
                   
                   <button
                     onClick={handleCheckout}
-                    disabled={loading}
+                    disabled={loading || !customerWhatsapp}
                     className="w-full bg-foreground text-background py-4 rounded-lg font-bold hover:bg-gray-800 transition-colors disabled:opacity-50"
                   >
                     {loading ? 'Processing...' : `Place Order — ₹${total.toFixed(2)}`}
@@ -204,11 +225,19 @@ export default function CheckoutPage() {
               ) : (
                 <div className="border border-border rounded-xl p-6 flex flex-col items-center">
                   <h3 className="text-lg font-bold text-foreground mb-2">Scan &amp; Pay</h3>
-                  <p className="text-sm text-foreground/60 mb-6">Open your UPI app and scan this code to pay <strong>₹{total.toFixed(2)}</strong></p>
+                  <p className="text-sm text-foreground/60 mb-6 text-center max-w-xs">Open your UPI app and scan this code to pay <strong>₹{total.toFixed(2)}</strong> or click the button below to open UPI apps automatically.</p>
                   
-                  <div className="p-4 bg-card border border-border shadow-sm rounded-xl mb-8">
+                  <div className="p-4 bg-card border border-border shadow-sm rounded-xl mb-6">
                     <QRCodeSVG value={upiLink} size={200} />
+                    <div className="text-center mt-3 text-xs font-mono font-medium text-foreground/60">UPI ID: storeowner@upi</div>
                   </div>
+
+                  <a
+                    href={upiLink}
+                    className="w-full max-w-sm bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors mb-8 text-center block"
+                  >
+                    Pay with UPI App
+                  </a>
 
                   <form onSubmit={handleConfirmUTR} className="w-full max-w-sm">
                     <label className="block text-xs font-bold text-foreground/80 uppercase tracking-wider mb-2">Transaction Reference (UTR)</label>
