@@ -7,9 +7,9 @@ export async function createOrder(
   totalAmount: number,
   items: { productId: string; quantity: number; unitPrice: number }[]
 ): Promise<Order> {
-  const supabase = await createClient();
+  const supabaseAdmin = createAdminClient();
   
-  const { data: order, error: orderError } = await supabase
+  const { data: order, error: orderError } = await supabaseAdmin
     .from('orders')
     .insert({
       profile_id: profileId,
@@ -28,7 +28,7 @@ export async function createOrder(
     unit_price: item.unitPrice,
   }));
 
-  const { error: itemsError } = await supabase
+  const { error: itemsError } = await supabaseAdmin
     .from('order_items')
     .insert(orderItems);
 
@@ -38,9 +38,9 @@ export async function createOrder(
 }
 
 export async function submitOrderUTR(orderId: string, utr: string): Promise<Order> {
-  const supabase = await createClient();
+  const supabaseAdmin = createAdminClient();
   
-  const { data, error } = await supabase
+  const { data, error } = await supabaseAdmin
     .from('orders')
     .update({ 
       transaction_ref: utr,
