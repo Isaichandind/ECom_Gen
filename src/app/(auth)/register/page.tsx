@@ -13,12 +13,18 @@ export default function RegisterPage() {
   const supabase = createClient();
 
   const handleGoogleLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: `${location.origin}/api/auth/confirm`
-      }
-    });
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${location.origin}/api/auth/confirm`
+        }
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      alert(err.message || 'Failed to login with Google');
+      console.error('Google login error:', err);
+    }
   };
 
   const handleRegister = async (e: React.FormEvent) => {
