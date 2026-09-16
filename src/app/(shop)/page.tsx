@@ -1,5 +1,5 @@
 import { getProducts } from '@/domains/inventory/services';
-import { AddToCartButton } from '@/domains/inventory/components/AddToCartButton';
+import { ProductCard } from '@/domains/inventory/components/ProductCard';
 import Link from 'next/link';
 import { Leaf, Droplets, Activity, HeartPulse } from 'lucide-react';
 
@@ -93,35 +93,8 @@ export default async function ShopHomePage() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {products.map((product, i) => (
-            <div key={product.id} className="bg-card rounded-xl border border-border overflow-hidden group flex flex-col hover:shadow-sm transition-shadow">
-              <div className="relative aspect-[4/3] bg-[#f9faf9] p-6 flex items-center justify-center border-b border-border">
-                {/* Badges */}
-                <div className="absolute top-4 left-4 z-10 flex flex-col gap-1">
-                  {i === 0 && <span className="bg-green-700 text-white text-[10px] font-bold px-2 py-1 rounded tracking-wide">Best Seller</span>}
-                  {product.name.includes('250g') && <span className="bg-foreground/10 text-foreground/70 border border-border text-[10px] font-bold px-2 py-1 rounded tracking-wide">Starter Size</span>}
-                  {product.name.includes('1kg') && <span className="bg-foreground/10 text-foreground/70 border border-border text-[10px] font-bold px-2 py-1 rounded tracking-wide">Value Pack</span>}
-                </div>
-                {/* Image Placeholder */}
-                <div className="w-2/3 h-full border-2 border-dashed border-foreground/20 rounded-lg flex items-center justify-center text-foreground/40 text-xs bg-card shadow-sm">
-                  Pouch
-                </div>
-              </div>
-              <div className="p-5 flex flex-col flex-1">
-                <div className="flex justify-between text-xs text-foreground/60 mb-2 font-medium">
-                  <span className="uppercase tracking-wider text-green-700">Vitality</span>
-                  <span className="flex items-center gap-1">☆ 4.{9 - (i % 3)}</span>
-                </div>
-                <h3 className="font-semibold text-foreground text-[15px] mb-6 line-clamp-2">{product.name}</h3>
-                
-                <div className="mt-auto flex items-center justify-between">
-                  <div className="font-bold text-foreground text-lg">₹{product.price}</div>
-                  <Link href={`/product/${product.id}`} className="text-xs font-semibold text-foreground border border-border px-3 py-1.5 rounded hover:border-foreground transition-colors flex items-center gap-1">
-                    Details <span className="text-[10px]">↗</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
+          {products.slice(0, 3).map((product, i) => (
+            <ProductCard key={product.id} product={product} index={i} />
           ))}
         </div>
       </div>
