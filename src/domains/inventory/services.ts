@@ -32,13 +32,34 @@ export async function getProductById(id: string): Promise<Product> {
 
 export async function reserveInventory(productId: string, quantity: number): Promise<boolean> {
   const supabase = getAdminSupabase();
-  const { data, error } = await supabase.rpc('reserve_inventory', {
+  
+  // Try to use RPC first, if it fails fallback to standard update
+  const { data: rpcData, error: rpcError } = await supabase.rpc('reserve_inventory', {
     p_product_id: productId,
     p_quantity: quantity,
   });
 
-  if (error) throw error;
-  return data;
+  if (!rpcError) {
+    return rpcData;
+  }
+
+  // Fallback if RPC doesn't exist
+  const { data: product, error: fetchError } = await supabase
+    .from('products')
+    .select('inventory_count')
+    .eq('id', productId)
+    .single();
+
+  if (fetchError) throw fetchError;
+  if (product.inventory_count < quantity) return false;
+
+  const { error: updateError } = await supabase
+    .from('products')
+    .update({ inventory_count: product.inventory_count - quantity })
+    .eq('id', productId);
+
+  if (updateError) throw updateError;
+  return true;
 }
 
 export async function updateProductInventory(productId: string, newQuantity: number) {
